@@ -1,0 +1,75 @@
+<%- include('../comunes/cabecera') %>
+
+<div class='container'>
+
+    <% const existeMensaje = typeof datos.mensaje != 'undefined'%>
+    <% if(existeMensaje){%>
+        <div class="alert alert-success" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+
+    <h1 align="center">Lista de tiktoks</h1>
+    <form action='/tiktok/lista-tiktoks' method='get'>
+        <div class="mb-3">
+            <label for="busqueda" class="form-label">
+                Busqueda
+            </label>
+            <input placeholder="Ej: Christopher"
+                   type="text"
+                   name="busqueda"
+                   class="form-control"
+                   id="busqueda"
+                   aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text">
+                Puede buscar por nombre o apellido.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+
+    <div>
+        <a href='/tiktok/vista-crear'>
+            <button class='btn btn-success w-100'>
+                Crear nuevo usuario
+            </button>
+        </a>
+    </div>
+
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th scope="col">#id</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Fecha publicación</th>
+            <th scope="col">Número de reproducciones</th>
+            <th scope="col">Copyright</th>
+            <th scope="col">Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% datos.tiktoks.forEach( (objeto) => { %>
+            <tr>
+                <th class="align-middle"><%= objeto.id %></th>
+                <th class="align-middle"><%= objeto.autor %></th>
+                <th class="align-middle"><%= objeto.fechaPublicacion %></th>
+                <th class="align-middle"><%= objeto.numReproducciones %> M</th>
+                <th class="align-middle"><%= objeto.copyright %></th>
+                <th>
+                    <form action="/tiktok/vista-editar/<%=objeto.id%>"
+                          method="post">
+                        <button class='btn btn-warning w-100'>Editar</button>
+                    </form>
+                    <form action="/tiktok/eliminar-tiktok/<%=objeto.id%>"
+                          method="post">
+                        <button class='btn btn-danger w-100'>Eliminar</button>
+                    </form>
+
+                </th>
+            </tr>
+        <% } ) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../comunes/footer') %>

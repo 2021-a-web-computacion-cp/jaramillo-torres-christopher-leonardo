@@ -1,0 +1,82 @@
+<%- include('../comunes/cabecera') %>
+
+<div class="container">
+    <h1 align="center"> Editar tiktok</h1>
+
+    <% const existeMensaje = typeof datos.mensaje != 'undefined'%>
+    <% if(existeMensaje){%>
+        <div class="alert alert-warning" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+
+    <form action='/tiktok/editar-tiktok-formulario/<%=datos.id%>' method='post'>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">
+                Autor
+            </label>
+            <input placeholder="Ej: Christopher"
+                   type="text"
+                   name="autor"
+                   class="form-control"
+                   id="autor"
+                   value="<%=datos.tiktok.autor%>"
+                   aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text">
+                Ingrese el nombre del autor
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Fecha de publicación" class="form-label">
+                Fecha de publicación
+            </label>
+            <input placeholder="Ej: 2001/01/01"
+                   type="text"
+                   name="fechaPublicacion"
+                   class="form-control"
+                   id="fechaPublicacion"
+                   value="<%=datos.tiktok.fechaPublicacion%>"
+                   aria-describedby="ayudaFecha">
+            <div id="ayudaFecha" class="form-text">
+                Ingrese la fecha
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Número de reproducciones" class="form-label">
+                Número de reproducciones
+            </label>
+            <input placeholder="Ej: 12"
+                   type="text"
+                   name="numReproducciones"
+                   class="form-control"
+                   id="numReproducciones"
+                   value="<%=datos.tiktok.numReproducciones%>"
+                   aria-describedby="ayudaReproducciones">
+            <div id="ayudaReproducciones" class="form-text">
+                Ingrese el número de reproducciones
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="copyright" class="form-label">Copyright</label>
+            <select id="copyright" name="copyright">
+
+                <% if(datos.tiktok.copyright == true){%>
+                    <option value="true">Si</option>
+                    <option value="false">No</option>
+                <% } else { %>
+                    <option value="false">No</option>
+                    <option value="true">Si</option>
+                <%}%>
+
+            </select>
+            <div id="ayudaCopyright" class="form-text">Seleccione si existe un copyright</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Editar tiktok</button>
+    </form>
+</div>
+
+<%- include('../comunes/footer') %>

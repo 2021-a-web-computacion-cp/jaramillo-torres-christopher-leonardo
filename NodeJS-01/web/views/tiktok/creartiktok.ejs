@@ -1,0 +1,73 @@
+<%- include('../comunes/cabecera') %>
+
+<div class="container">
+    <h1 align="center">Crear tiktok</h1>
+
+    <% const existeMensaje = typeof datos.mensaje != 'undefined'%>
+    <% if(existeMensaje){%>
+        <div class="alert alert-warning" role="alert">
+            <%= datos.mensaje%>
+        </div>
+    <%}%>
+
+    <form action='/tiktok/crear-tiktok-formulario' method='post'>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">
+                Autor
+            </label>
+            <input placeholder="Ej: Christopher -> Entre 5 y 15 caracteres"
+                   type="text"
+                   name="autor"
+                   class="form-control"
+                   id="autor"
+                   value="<%= datos.aut%>"
+                   aria-describedby="ayudaNombre">
+            <div id="ayudaNombre" class="form-text">
+                Ingrese el nombre del autor
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Fecha de publicación" class="form-label">
+                Fecha de publicación
+            </label>
+            <input placeholder="Ej: 2001/01/01 -> YYYY/MM/DD"
+                   type="text"
+                   name="fechaPublicacion"
+                   class="form-control"
+                   id="fechaPublicacion"
+                   aria-describedby="ayudaFecha">
+            <div id="ayudaFecha" class="form-text">
+                Ingrese la fecha
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="Número de reproducciones" class="form-label">
+                Número de reproducciones
+            </label>
+            <input placeholder="Ej: 12 -> Solo números reales"
+                   type="text"
+                   name="numReproducciones"
+                   class="form-control"
+                   id="numReproducciones"
+                   aria-describedby="ayudaReproducciones">
+            <div id="ayudaReproducciones" class="form-text">
+                Ingrese el número de reproducciones
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="copyright" class="form-label">Copyright</label>
+            <select id="copyright" name="copyright">
+                <option value="true">Si</option>
+                <option value="false">No</option>
+            </select>
+            <div id="ayudaCopyright" class="form-text">Seleccione si existe un copyright</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Crear tiktok</button>
+    </form>
+</div>
+
+<%- include('../comunes/footer') %>
